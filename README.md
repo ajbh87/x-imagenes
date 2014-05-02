@@ -1,5 +1,7 @@
 x-imagenes
 ==========
+Licensed under the MIT license
+
 Copyright (c) 2014 Alfredo J. Bermúdez Hernández
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
