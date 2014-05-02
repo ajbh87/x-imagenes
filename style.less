@@ -1,0 +1,361 @@
+@charset "utf-8";
+/*MIXINS*/
+.box-size {
+    -moz-box-sizing: border-box;  
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.bordered( @top: 4px; @right: 4px; @bot: 4px; @left: 4px ) {
+    border: solid #000;
+    border-width: @top @right @bot @left;
+}
+.animation(@options){
+    -webkit-animation: @options; /* Chrome, Safari, Opera */
+    animation: @options;
+}
+body {
+    font-family: "lint-mccree", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    -webkit-text-size-adjust: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    margin: 0;
+}
+h1, h2, h3, h4 {
+    font-family: "lint-mccree-i7","lint-mccree", sans-serif;
+    font-style: italic;
+    font-weight: 700;
+}
+h1 {
+    font-size: 20px;
+    margin: 20px 0;
+    span {
+        font-size: 16px;
+    }
+    @media screen and (max-width: 1280px)
+    {
+        font-size: 18px;
+    }
+
+}
+h2 {
+    font-size: 16px;
+}
+h3 {
+    font-size: 14px;
+}
+div {
+    .box-size;
+    padding: 0;
+}
+a {
+    cursor: pointer;
+    text-decoration: none;
+    color: #000;
+}
+/*------------------------------------------------------STRUCTURE-----------------------------------------------*/
+#container {
+    float: left;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+div#menu {
+    float: left;
+    position: fixed;
+    right: 10%;
+    .bordered(0, 4px, 4px, 4px);
+    background: #fff;
+    z-index: 150;
+    a {
+        float: left;
+        padding: 5px 10px;
+    }
+}
+#submission {
+    width: 80%;
+    height: 80%;
+    position: fixed;
+    top: 10%;
+    left: 10%;
+    .bordered;
+    background: #fff;
+    z-index: 250;
+    display: none;
+}
+//--------------------------------------------------------------------Tutorial
+#tut-container {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 500;
+    background-color: rgba(255, 255, 255, .6);
+    text-align: center;
+    #tut-welcome {
+            display: inline-block;
+            position: relative;
+            top: 30px;
+            background-color: #fff;
+            padding: 30px;
+            .bordered;
+        }
+}
+//--------------------------------------------------------------------Sidebar
+#sidebar {
+    float: left;
+    position: fixed;
+    width: 15%;
+    height: 100%;
+    ul {
+        list-style-type: none;
+        padding: 0;
+        li {
+            margin: 5px;
+        }
+    }
+}
+div#tags {
+    height: 75%;
+    padding: 10px 20px;
+    }
+div#tools {
+    height: 25%;
+    padding: 0 10px;
+    z-index: 500;
+    background: #fff;
+    .bordered(4px, 4px, 0, 0);
+    a {
+        float: left;
+        margin: 10px 0;
+    }
+}
+//---------------------------------------------------------------------------Canvas
+#canvas-out-cont {
+    float: left;
+    position: fixed;
+    left: 15%;
+    width: 85%;
+    height: 100%;
+    overflow-y: auto;
+}
+#canvas-cont {
+    float: left;
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+.canvas {
+    .box-size;
+    float: left;
+    position: relative;
+    width: 940px;
+    height: 636px;
+    margin: 60px;
+    z-index: 1;
+    background: #fff;
+    .bordered;
+    @media screen and (max-width: 1280px) {
+        margin: 30px;
+    }
+    .handle {
+        display: block;
+        position: absolute;
+        height: 20px;
+        width: 20px;
+        background: #000;
+        top: -20px;
+        right: 0;
+        cursor: move; 
+    }
+}
+.page-highlight {
+     float: left;
+     position: relative;
+     width: 940px;
+     height: 636px;
+     margin: 60px;
+     background: #eee;
+     @media screen and (max-width: 1280px) {
+        margin: 30px;
+    }
+}
+.canvas-active {
+    border-color: #707070;
+    .handle {
+         background: #707070;
+    }
+}
+//---------------------------------------------------------------Panel Selection
+#selection-wrap {
+    float: left;
+    position: fixed;
+    width: 75%;
+    height: 400px;
+    bottom: -400px;
+    .bordered(4px, 4px, 0, 4px);
+    background: #fff;
+    z-index: 25;
+    opacity: 0;
+    &.fade-in {
+        .animation(fadein .5s;);
+        opacity: 1;
+    }
+    &.slide-up {
+        .animation(slidein 1s;);
+        bottom: 0px;
+    }
+    &.slide-down {
+       .animation(slideout 1s;);
+        bottom: -400px;
+    }
+}
+@-webkit-keyframes fadein {
+0%      {opacity: 0;}
+100%    {opacity: 1;}
+}
+@keyframes fadein {
+0%      {opacity: 0;}
+100%    {opacity: 1;}
+}
+
+@-webkit-keyframes slidein {
+0%      {bottom: -400px;}
+100%    {bottom: 0px;}
+}
+@keyframes slidein {
+0%      {bottom: -400px;}
+100%    {bottom: 0px;}
+}
+
+@-webkit-keyframes slideout {
+0%      {bottom: 0px;}
+100%    {bottom: -400px;}
+}
+@keyframes slideout {
+0%      {bottom: 0px;}
+100%    {bottom: -400px;}
+}
+#selection {
+    float: left;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 10px;
+    overflow-y: auto;
+    h3 {
+        clear: both;
+        margin: 5px 10px;
+    }
+}
+a#showHide {
+    position: absolute;
+    display: block;
+    height: 20px;
+    top: -30px;
+    right: 0px;
+    padding: 5px 10px;
+    background: #000;
+    color: #fff;
+    font-weight: 700;
+    font-size: 26px;
+    z-index: 150;
+    &.rotate {
+    transform: rotate(180deg);
+    -ms-transform: rotate(180deg); /* IE 9 */
+    -webkit-transform: rotate(180deg); /* Safari and Chrome */
+}
+}
+
+//-----------------------------------------------------------------------------------Paneles
+@size: 290px;
+@mar: 10px;
+@wide: (@size * 2)+(@mar*2);
+div.paneles {
+    float: left;
+    position: relative;
+    display: block;
+    width: @size;
+    height: @size;
+    margin: @mar;
+    background-size: @size @size;
+    z-index: 100;
+    &.wide {
+        width: (@wide);
+        background-size: (@wide) @size;
+    }
+}
+div.canvas div.paneles {
+    float: left;
+    position: absolute;
+}
+div.ui-state-highlight {
+    float: left;
+    position: relative;
+    display: block;
+    width: @size;
+    height: @size;
+    margin: @mar;
+    background: #eee;
+    &.wide {
+         width: @wide !important;
+    }
+}
+
+a.close {
+    position: absolute;
+    display: block;
+    height: 20px;
+    top: 10px;
+    right: 10px;
+    padding: 5px 10px;
+    background: #000;
+    color: #fff;
+    font-weight: 700;
+    font-size: 18px;
+    opacity: 1.0;
+    z-index: 150;
+}
+
+//----------------------------------------------------------Gallery
+div.story {
+    float: left;
+    position: relative;
+    clear: both;
+    margin: 0 0 60px 0;
+    div.canvas {
+        margin-bottom: 0;
+    }
+}
+div#gallery {
+    position: relative;
+    float: left;
+    left: 15%;
+}
+
+div#gallery-pages {
+    float: left;
+}
+
+div.comic-pages {
+    float: right;
+    position: relative;
+    clear: both;
+    right: 60px;
+    bottom: 0;
+    a.comic-pages {
+        display: block;
+        float: left;
+        padding: 10px 15px;
+        background: #000;
+        color: #fff;
+    }
+    a.comic-pages.active-comic-page {
+        background: #707070;
+    }
+}
