@@ -8,6 +8,11 @@ $email = $_GET['myemail'];
 $desc = $_GET['mydesc'];
 
 require 'connection.php';
+$titulo = mysqli_real_escape_string($con, $titulo);
+$name = mysqli_real_escape_string($con, $name);
+$pages = mysqli_real_escape_string($con, $pages);
+$email = mysqli_real_escape_string($con, $email);
+$desc = mysqli_real_escape_string($con, $desc);
 
 $IDresult = mysqli_query($con, "SELECT storyID FROM user_sub ORDER BY storyID DESC LIMIT 1");
 $lastID = mysqli_fetch_array ($IDresult);

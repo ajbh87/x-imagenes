@@ -15,7 +15,7 @@
 <link rel="stylesheet" type="text/css" media="all" href="style.css">
 <body>
 <?php
-if (empty($_COOKIE['tut'])){
+if (!empty($_COOKIE['tut'])){
 echo <<<HTML
 	<div id="tut-container">
 		<div id="tut-welcome">
@@ -28,12 +28,9 @@ HTML;
 }
 ?>
 <div id="container">
-	<div id="menu">
-		<a id="gallery" href="gallery.php">Galería</a>
-	</div>
 	<div id="submission">
-		<a id="sub_close" class="close">X</a>
 		<div id="sub-content">
+			<a id="sub_close" class="close">X</a>
 			<form id="submit" >  
 				<fieldset> 
 					<label for="title" id="title_label">Título</label>  
@@ -45,29 +42,37 @@ HTML;
 					<label for="desc" id="desc_label">Descripción</label>
 					<textarea id="desc" rows="4" cols="50" placeholder="Si quiere describa su obra..."></textarea>
 					<br />  
-					<input type="submit" class="button" id="submit_btn" label="Enviar"></input>
+					<input type="submit" class="button" id="submit_btn" value="Enviar"></input>
 				</fieldset>  
 			</form>  
 		</div>
 	</div>
 	<div id="sidebar">
-		<div id="tags">
-			<h1>Alfredo:</br><span>Una pseudo-biografía</span></h1>
-			<h2>¡Tags!</h2>
-			<ul id="tags">
-				<li><a name="todos">Todos</a></li>
-				<?php
-				require 'connection.php';
-				$sql="SELECT * FROM tag_info ";
-				$result = mysqli_query($con,$sql);
+		<div id="tags-container">
+			<div id="nav-container">
+				<h1>Alfredo:</br><span>Una pseudo-biografía</span></h1>
+				<nav id="primary">
+					<li><a class="active">¡Crea tu cómic!</a></li>
+					<li><a href="gallery.php">Galería</a></li>
+				</nav>
+			</div>
+			<div id="tags">
+				<h2>¡Tags!</h2>
+				<ul id="tags">
+					<li><a name="todos">Todos</a></li>
+					<?php
+					require 'connection.php';
+					$sql="SELECT * FROM tag_info ";
+					$result = mysqli_query($con,$sql);
 
-				while($fieldinfo = mysqli_fetch_array($result))
-					{
-					echo '<li><a name="',$fieldinfo['Stud'],'">',$fieldinfo['Name'],'</a></li>';
-					}
-				mysqli_close($con);
-				?>
-			</ul>
+					while($fieldinfo = mysqli_fetch_array($result))
+						{
+						echo '<li><a name="',$fieldinfo['Stud'],'">',$fieldinfo['Name'],'</a></li>';
+						}
+					mysqli_close($con);
+					?>
+				</ul>
+			</div>
 		</div>
 		<div id="tools">
 			<h3>Herramientas</h3>
@@ -82,12 +87,14 @@ HTML;
 				<div class="handle">
 				</div>
 			</div>
-		</div>	
+		</div>
+	</div>
+	<div id="sel-overwarp">
 		<div id="selection-wrap">
+			<a id="showHide" class="hidden"></a>
 			<div id="selection">
 			</div>
 		</div>
 	</div>
-	
 </div>
 </body>

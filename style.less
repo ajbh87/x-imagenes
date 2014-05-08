@@ -1,4 +1,10 @@
 @charset "utf-8";
+/*VARIABLES*/
+@grey: #707070;
+@size: 290px;
+@mar: 10px;
+@wide: (@size * 2)+(@mar*2);
+
 /*MIXINS*/
 .box-size {
     -moz-box-sizing: border-box;  
@@ -13,7 +19,23 @@
     -webkit-animation: @options; /* Chrome, Safari, Opera */
     animation: @options;
 }
-body {
+.bttn {
+    float: left;
+    display: block;
+    width: 100%;
+    margin: 3px 0;
+    clear: both;
+    padding: 5px;
+    background-color: #000;
+    border: 0;
+    color: #fff;
+    text-align: center;
+    .box-size;
+    &.active {
+        background-color: @grey;    
+    }
+}
+.regular-font {
     font-family: "lint-mccree", sans-serif;
     font-weight: 400;
     font-size: 14px;
@@ -21,6 +43,12 @@ body {
     -moz-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     margin: 0;
+    @media screen and (max-width: 1410px) {
+        font-size: 12px;
+    }
+}
+body,button {
+    .regular-font;
 }
 h1, h2, h3, h4 {
     font-family: "lint-mccree-i7","lint-mccree", sans-serif;
@@ -28,22 +56,27 @@ h1, h2, h3, h4 {
     font-weight: 700;
 }
 h1 {
-    font-size: 20px;
+    font-size: 24px;
     margin: 20px 0;
+    line-height: 24px;
     span {
         font-size: 16px;
+        line-height: 16px;
     }
-    @media screen and (max-width: 1280px)
+    @media screen and (max-width: 1410px)
     {
         font-size: 18px;
     }
-
 }
 h2 {
     font-size: 16px;
 }
 h3 {
     font-size: 14px;
+}
+h4 {
+    font-size: 13px;
+    margin: 10px 0;
 }
 div {
     .box-size;
@@ -61,30 +94,65 @@ a {
     top: 0;
     left: 0;
     width: 100%;
+    min-width: 1240px;
     height: 100%;
+    min-height: 600px;
 }
-div#menu {
-    float: left;
-    position: fixed;
-    right: 10%;
-    .bordered(0, 4px, 4px, 4px);
-    background: #fff;
-    z-index: 150;
-    a {
-        float: left;
-        padding: 5px 10px;
-    }
-}
+
 #submission {
-    width: 80%;
-    height: 80%;
+    width: 100%;
+    height: 100%;
     position: fixed;
-    top: 10%;
-    left: 10%;
-    .bordered;
-    background: #fff;
-    z-index: 250;
+    top: 0;
+    left: 0;
+    padding: 0;
+    background: rgba(255, 255, 255, .6);
+    z-index: 2000;
     display: none;
+    div#sub-content {
+        .box-size;
+        width: 740px;
+        height: 440px;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        margin: -220px 0 0 -370px;
+        padding: 50px;
+        .bordered;
+        background: #fff;
+        form#submit {
+            fieldset {
+                border: 0;
+                padding: 0;
+                margin: 0;
+                label {
+                    float: left;
+                    clear: left;
+                    margin: 5px 0;
+                    &#desc_label {
+                        clear: both;
+                    }
+                }
+                input {
+                    .box-size;
+                    float: right;
+                    width: 60%;
+                    &#submit_btn {
+                        .regular-font;
+                        .bttn;
+                    }
+                }
+                textarea {
+                    .box-size;
+                    float: left;
+                    width: 100%;
+                    height: 200px;
+                    clear: both;
+                    resize: none;
+                }
+            }
+        }
+    }
 }
 //--------------------------------------------------------------------Tutorial
 #tut-container {
@@ -109,39 +177,99 @@ div#menu {
 #sidebar {
     float: left;
     position: fixed;
-    width: 15%;
     height: 100%;
-    ul {
-        list-style-type: none;
-        padding: 0;
-        li {
-            margin: 5px;
+    overflow: hidden;
+    width: 15%;
+    min-width: 188px;
+    z-index: 1000;
+    background: #fff;
+    div#tags-container {
+        float: left;
+        height: 70%;
+        width: 100%;
+        div#nav-container {
+            float: left;
+            width: 100%;
+            padding: 10px 20px;
+            nav {
+                float: left;
+                width: 100%;
+                list-style-type: none;
+                li a {
+                        .bttn;
+                        margin-bottom: 0;
+                        border-bottom: 5px solid #fff;
+                        &.active {
+                            border-bottom-color: #000;
+                        }
+                }    
+            }
+        }
+    }
+    div#tags {
+        width: 100%;
+        float: left;
+        padding: 10px 20px;
+        overflow-x: hidden;
+        overflow-y: auto;
+        ul {
+            list-style-type: none;
+            padding: 0;
+            li {
+                margin: 5px;
+            }
+        }
+    }
+    div#tools {
+        float: left;
+        height: 30%;
+        width: 100%;
+        padding: 0 15px;
+        z-index: 500;
+        background: #fff;
+        .bordered(4px, 4px, 0, 0);
+        .box-size;
+        h3 {
+        }
+        a {
+            .box-size;
+            .bttn;
+            &:last-child {
+                background-color: @grey;
+            }
+        }
+    }
+    @media screen and (max-width: 1410px) {
+        width: 188px;
+        h1 {
+            margin: 10px 0;
+        }
+        div#nav-container, div#tags {
+            padding: 10px !important;
+        }
+        div#tools {
+            padding: 0 10px !important;
         }
     }
 }
-div#tags {
-    height: 75%;
-    padding: 10px 20px;
-    }
-div#tools {
-    height: 25%;
-    padding: 0 10px;
-    z-index: 500;
-    background: #fff;
-    .bordered(4px, 4px, 0, 0);
-    a {
-        float: left;
-        margin: 10px 0;
-    }
-}
+
+
 //---------------------------------------------------------------------------Canvas
 #canvas-out-cont {
     float: left;
-    position: fixed;
+    position: absolute;
     left: 15%;
     width: 85%;
+    min-width: 1000px;
     height: 100%;
-    overflow-y: auto;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    @media screen and (max-width: 1410px) {
+        left: 188px;
+    }
+    @media screen and (max-width: 1280px) {
+        width: 1000px;
+    }
 }
 #canvas-cont {
     float: left;
@@ -157,23 +285,27 @@ div#tools {
     width: 940px;
     height: 636px;
     margin: 60px;
+    padding: 10px 30px 10px 10px;
     z-index: 1;
     background: #fff;
     .bordered;
-    @media screen and (max-width: 1280px) {
-        margin: 30px;
+    @media screen and (max-width: 1410px) {
+        margin: 15px;
     }
     .handle {
         display: block;
         position: absolute;
-        height: 20px;
-        width: 20px;
-        background: #000;
-        top: -20px;
-        right: 0;
-        cursor: move; 
+        height: 30px;
+        width: 30px;
+        background-color: #000;
+        background-image: url(move.png);
+        background-position: center center;
+        top: 15px;
+        right: -30px;
+        cursor: move;
     }
 }
+
 .page-highlight {
      float: left;
      position: relative;
@@ -181,21 +313,31 @@ div#tools {
      height: 636px;
      margin: 60px;
      background: #eee;
-     @media screen and (max-width: 1280px) {
+     @media screen and (max-width: 1410px) {
         margin: 30px;
     }
 }
 .canvas-active {
-    border-color: #707070;
+    border-color: @grey;
     .handle {
-         background: #707070;
+         background-color: @grey;
     }
 }
 //---------------------------------------------------------------Panel Selection
+#sel-overwarp {
+    float: left;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;    
+    bottom: 15px;
+    overflow: hidden;
+    }
 #selection-wrap {
     float: left;
-    position: fixed;
-    width: 75%;
+    position: absolute;
+    width: 80%;
+    left: 17%;
     height: 400px;
     bottom: -400px;
     .bordered(4px, 4px, 0, 4px);
@@ -256,26 +398,25 @@ div#tools {
 a#showHide {
     position: absolute;
     display: block;
-    height: 20px;
-    top: -30px;
-    right: 0px;
-    padding: 5px 10px;
+    height: 25px;
+    width: 30px;
+    top: -29px;
+    right: 15px;
+    padding: 0;
     background: #000;
+    background-image: url(arrow.png);
+    background-position: 0 0;
     color: #fff;
     font-weight: 700;
     font-size: 26px;
+    text-align: center;
     z-index: 150;
     &.rotate {
-    transform: rotate(180deg);
-    -ms-transform: rotate(180deg); /* IE 9 */
-    -webkit-transform: rotate(180deg); /* Safari and Chrome */
-}
+        background-position: 0 25px;
+    }
 }
 
 //-----------------------------------------------------------------------------------Paneles
-@size: 290px;
-@mar: 10px;
-@wide: (@size * 2)+(@mar*2);
 div.paneles {
     float: left;
     position: relative;
@@ -289,64 +430,115 @@ div.paneles {
         width: (@wide);
         background-size: (@wide) @size;
     }
+    &.drag2 {
+        margin: 0;
+    }
 }
 div.canvas div.paneles {
     float: left;
     position: absolute;
 }
-div.ui-state-highlight {
-    float: left;
-    position: relative;
-    display: block;
-    width: @size;
-    height: @size;
-    margin: @mar;
-    background: #eee;
-    &.wide {
-         width: @wide !important;
-    }
-}
 
 a.close {
+    .box-size;
     position: absolute;
     display: block;
-    height: 20px;
+    height: 30px;
+    width: 30px;
     top: 10px;
     right: 10px;
-    padding: 5px 10px;
+    padding: 5px 7px;
     background: #000;
     color: #fff;
     font-weight: 700;
     font-size: 18px;
+    line-height: 18px;
     opacity: 1.0;
     z-index: 150;
 }
 
 //----------------------------------------------------------Gallery
-div.story {
-    float: left;
-    position: relative;
-    clear: both;
-    margin: 0 0 60px 0;
-    div.canvas {
-        margin-bottom: 0;
-    }
-}
+
 div#gallery {
-    position: relative;
+    position: absolute;
     float: left;
     left: 15%;
+    @media screen and (max-width: 1410px) {
+            left: 188px;
+        }
+    div#selector {
+        margin-right: 60px;
+        float: right;
+        text-align: right;
+        ul {
+            float: right;
+            list-style: none;
+            margin: 0;
+            li {
+                display: block;
+                float: left;
+                padding: 10px 15px;
+                margin: 0;
+                background: #000;
+                color: #fff;
+                cursor: pointer;
+                &.active {
+                     background: @grey;
+                }
+            }
+        }
+        @media screen and (max-width: 1410px) {
+            margin-right: 30px;
+        }
+    }
+    div.gallery-pages {
+        margin-left: 60px;
+        margin-right: 30px;
+        float: left;
+        clear: left;
+        a.pages {
+            display: block;
+            float: left;
+            padding: 10px 15px;
+            background: #000;
+            color: #fff;
+            &.active-page {
+                background: @grey;
+            }
+        }
+        @media screen and (max-width: 1410px) {
+            margin-left: 30px;
+        }
+    }
+    div.story {
+        float: left;
+        position: relative;
+        clear: both;
+        margin: 0 60px 60px 60px;
+        div.canvas {
+            margin: 60px 0 0 0;
+            border-color: @grey;
+            float: left;
+            @media screen and (max-width: 1410px) {
+                margin: 30px 0 0 0;
+            }
+            &.paneles {
+                margin: 0;
+            }
+        }
+        @media screen and (max-width: 1410px) {
+            margin: 0 30px 30px 30px;
+        }
+    }
 }
 
-div#gallery-pages {
-    float: left;
-}
+
 
 div.comic-pages {
     float: right;
     position: relative;
     clear: both;
-    right: 60px;
+    right: 0;
     bottom: 0;
     a.comic-pages {
         display: block;
@@ -356,6 +548,44 @@ div.comic-pages {
         color: #fff;
     }
     a.comic-pages.active-comic-page {
-        background: #707070;
+        background: @grey;
     }
 }
+div#search {
+    float: left;
+    width: 100%;
+    margin: 10px 0;
+    form#search {
+        float: left;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        input#query {
+            .box-size;
+            float: left;
+            width: 63%;
+            height: 28px;
+            padding: 5px;
+            margin: 0;
+            border: 1px solid #000;
+        }
+        button#search {
+            .box-size;
+            float: left;
+            height: 28px;
+            width: 37%;
+            margin: 0;
+            padding: 0;
+            border: 1px solid #000;
+            background: #000;
+            color: #fff;
+            font-size: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+    }
+}
+
+.loading {
+    background: url(ajax-loader.gif) center center no-repeat;
+    }
