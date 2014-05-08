@@ -30,9 +30,9 @@ $.fn.showClose = function (closeLink) {
 			}
 }
 $.fn.makeDrag = function () {
-	$("div.drag2").draggable({
+	$("div.canvas-active div.drag2").draggable({
 		stack: "div.drag2",
-		containment: "div.canvas"
+		containment: "parent"
 	});
 }
 $.fn.addClose = function(){
