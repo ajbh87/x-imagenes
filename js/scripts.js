@@ -318,5 +318,44 @@ $(document).ready(function(){
 			location.reload();
 		});
 	});
+	$("a#tut-exit").click(function(){
+		$("div#tut-container").fadeOut(800);
+		setCookie("tut", true, 2000);
+	});
+	
+	function fadeNav() {
+		if (activeTutPage == 1) {
+			$("a#tut-prev").fadeOut();
+		} else {
+			$("a#tut-prev").fadeIn();
+		}
+		if (activeTutPage == 7) {
+			$("a#tut-next").fadeOut();
+			$("a#tut-exit").addClass('animated pulse');
+		} else {
+			$("a#tut-next").fadeIn();
+		}
+	}
+	$("a#tut-prev").hide();
+	var activeTutPage = 1;
+	function startTut() {
+		$("a#tut-next").addClass('animated pulse');
+		$("div#tut-1").addClass("fade-in");
+		$("a#tut-prev").click(function(){
+		$("div.fade-in").removeClass("fade-in").addClass("fade-out");
+			activeTutPage--;
+			var newId = "div#tut-" + activeTutPage;
+			$(newId).removeClass("fade-out").addClass("fade-in");
+			fadeNav();
+		});
+		$("a#tut-next").click(function(){
+			$("div.fade-in").removeClass("fade-in").addClass("fade-out");
+			activeTutPage++;
+			var newId = "div#tut-" + activeTutPage;
+			$(newId).removeClass("fade-out").addClass("fade-in");
+			fadeNav();
+		});
+	}
+	var tutTimeout = window.setTimeout(startTut, 800);	
 });
 

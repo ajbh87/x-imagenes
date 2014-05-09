@@ -47,6 +47,40 @@
         font-size: 12px;
     }
 }
+@-webkit-keyframes fadein {
+0%      {opacity: 0;}
+100%    {opacity: 1;}
+}
+@keyframes fadein {
+0%      {opacity: 0;}
+100%    {opacity: 1;}
+}
+@-webkit-keyframes fadeout {
+0%      {opacity: 1;}
+100%    {opacity: 0;}
+}
+@keyframes fadeout {
+0%      {opacity: 1;}
+100%    {opacity: 0;}
+}
+
+@-webkit-keyframes slidein {
+0%      {bottom: -400px;}
+100%    {bottom: 0px;}
+}
+@keyframes slidein {
+0%      {bottom: -400px;}
+100%    {bottom: 0px;}
+}
+
+@-webkit-keyframes slideout {
+0%      {bottom: 0px;}
+100%    {bottom: -400px;}
+}
+@keyframes slideout {
+0%      {bottom: 0px;}
+100%    {bottom: -400px;}
+}
 body,button {
     .regular-font;
 }
@@ -87,6 +121,11 @@ a {
     text-decoration: none;
     color: #000;
 }
+p {
+    a {
+        color: @grey;
+    }
+}
 /*------------------------------------------------------STRUCTURE-----------------------------------------------*/
 #container {
     float: left;
@@ -98,7 +137,15 @@ a {
     height: 100%;
     min-height: 600px;
 }
-
+div#social {
+    float: left;
+    clear: both;
+    margin: 10px 0;
+    div {
+        float: left;
+        margin-right: 15px;
+    }
+}
 #submission {
     width: 100%;
     height: 100%;
@@ -154,6 +201,17 @@ a {
         }
     }
 }
+div#thank-container {
+    float: left;
+    width: 940px;
+    margin: 0 60px;
+    @media screen and (max-width: 1410px) {
+        margin: 0 30px;
+    }
+    div#social {
+        margin: 0;
+    }
+}
 //--------------------------------------------------------------------Tutorial
 #tut-container {
     position: fixed;
@@ -161,9 +219,43 @@ a {
     height: 100%;
     left: 0;
     top: 0;
-    z-index: 500;
+    z-index: 1500;
     background-color: rgba(255, 255, 255, .6);
     text-align: center;
+    a.tut-nav, a#tut-exit {
+        .bttn;
+        display: block;
+        float: none;
+        width: 120px;
+        margin: 0;
+        padding: 15px;
+        position: fixed;
+        z-index: 3000;
+    }
+    #tut-prev {
+        left: 0;
+        bottom: 0;
+    }
+    #tut-next {
+        right: 0;
+        bottom: 0;
+    }
+    a#tut-exit {
+        right: 0;
+        top: 0;
+        width: 160px;
+        margin: 0;
+        text-align: right;
+        padding-right: 30px;
+        &:before {
+            content: "X";
+            display: block;
+            position: absolute;
+            left: 20px;
+            top: 20px;
+            font-size: 18px;
+        }
+    }
     #tut-welcome {
             display: inline-block;
             position: relative;
@@ -171,7 +263,68 @@ a {
             background-color: #fff;
             padding: 30px;
             .bordered;
+    }
+    .tut {
+        position: absolute;
+        display: block;
+        bottom: 0;
+        opacity: 0;
+        margin: 0;
+        padding: 0;
+        background-repeat: no-repeat;
+        background-position: 0 0;
+        z-index: 3000;
+        &.fade-in {
+            .animation(fadein .5s;);
+            opacity: 1;
         }
+        &.fade-out {
+            .animation(fadeout .5s;);
+            opacity: 0;
+        }
+    }
+    div#tut-1 {
+        left: 40px;
+        width: 670px;
+        height: 663px;
+        background-image: url(tut/1.png);
+    }
+    div#tut-2 {
+        left: 670px;
+        width: 766px;
+        height: 495px;
+        background-image: url(tut/2.png);
+    }
+    div#tut-3 {
+        left: 40px;
+        width: 524px;
+        height: 706px;
+        background-image: url(tut/3.png);
+    }
+    div#tut-4 {
+        left: 670px;
+        width: 760px;
+        height: 719px;
+        background-image: url(tut/4.png);
+    }
+    div#tut-5 {
+        left: 40px;
+        width: 718px;
+        height: 650px;
+        background-image: url(tut/5.png);
+    }
+    div#tut-6 {
+        left: 500px;
+        width: 779px;
+        height: 704px;
+        background-image: url(tut/6.png);
+    }
+    div#tut-7 {
+        left: 80px;
+        width: 1059px;
+        height: 483px;
+        background-image: url(tut/7.png);
+    }
 }
 //--------------------------------------------------------------------Sidebar
 #sidebar {
@@ -314,7 +467,7 @@ a {
      margin: 60px;
      background: #eee;
      @media screen and (max-width: 1410px) {
-        margin: 30px;
+        margin: 15px;
     }
 }
 .canvas-active {
@@ -357,32 +510,7 @@ a {
         bottom: -400px;
     }
 }
-@-webkit-keyframes fadein {
-0%      {opacity: 0;}
-100%    {opacity: 1;}
-}
-@keyframes fadein {
-0%      {opacity: 0;}
-100%    {opacity: 1;}
-}
 
-@-webkit-keyframes slidein {
-0%      {bottom: -400px;}
-100%    {bottom: 0px;}
-}
-@keyframes slidein {
-0%      {bottom: -400px;}
-100%    {bottom: 0px;}
-}
-
-@-webkit-keyframes slideout {
-0%      {bottom: 0px;}
-100%    {bottom: -400px;}
-}
-@keyframes slideout {
-0%      {bottom: 0px;}
-100%    {bottom: -400px;}
-}
 #selection {
     float: left;
     width: 100%;
@@ -514,20 +642,17 @@ div#gallery {
         float: left;
         position: relative;
         clear: both;
-        margin: 0 60px 60px 60px;
+        margin: 30px 60px 60px 60px;
         div.canvas {
-            margin: 60px 0 0 0;
+            margin: 10px 0 0 0;
             border-color: @grey;
             float: left;
-            @media screen and (max-width: 1410px) {
-                margin: 30px 0 0 0;
-            }
             &.paneles {
                 margin: 0;
             }
         }
         @media screen and (max-width: 1410px) {
-            margin: 0 30px 30px 30px;
+            margin: 15px 30px 30px 30px;
         }
     }
 }

@@ -6,23 +6,27 @@
 <link rel="icon" href="">
 <script type="text/javascript" src="//use.typekit.net/qjz6zfi.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-<script type="text/javascript" language="javascript" src="js/jquery-2.1.0.min.js"></script>
-<script type="text/javascript" language="javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" language="javascript" src="js/jquery-ui-1.10.3.custom.js"></script>
-<script type="text/javascript" language="javascript" src="js/jquery.hoverIntent.minified.js"></script>
-<script type="text/javascript" language="javascript" src="js/jquery.ui.touch-punch.min.js"></script>
-<script type="text/javascript" language="javascript" src="js/scripts.js"></script>
 <link rel="stylesheet" type="text/css" media="all" href="style.css">
+<link rel="stylesheet" type="text/css" media="all" href="animate.min.css">
 <body>
 <?php
-if (!empty($_COOKIE['tut'])){
+if (empty($_COOKIE['tut']) || ($_COOKIE['tut'] != true)){
 echo <<<HTML
 	<div id="tut-container">
+		<a id="tut-exit">Cerrar Tutorial</a>
 		<div id="tut-welcome">
 			<h3>Bienvenido al cómic</h3>
 			<h1>Alfredo:</br><span>Una pseudo-biografía</span></h1>
-			
 		</div>
+		<div id="tut-1" class="tut"></div>
+		<div id="tut-2" class="tut"></div>
+		<div id="tut-3" class="tut"></div>
+		<div id="tut-4" class="tut"></div>
+		<div id="tut-5" class="tut"></div>
+		<div id="tut-6" class="tut"></div>
+		<div id="tut-7" class="tut"></div>
+		<a id="tut-prev" class="tut-nav">Previo</a>
+		<a id="tut-next" class="tut-nav">Próximo</a>
 	</div>
 HTML;
 }
@@ -97,4 +101,10 @@ HTML;
 		</div>
 	</div>
 </div>
+<script type="text/javascript" language="javascript" src="js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript" language="javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" language="javascript" src="js/jquery-ui-1.10.3.custom.js"></script>
+<script type="text/javascript" language="javascript" src="js/jquery.hoverIntent.minified.js"></script>
+<script type="text/javascript" language="javascript" src="js/jquery.ui.touch-punch.min.js"></script>
+<script type="text/javascript" language="javascript" src="js/scripts.js"></script>
 </body>

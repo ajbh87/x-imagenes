@@ -6,12 +6,6 @@
 <link rel="icon" href="">
 <script type="text/javascript" src="//use.typekit.net/qjz6zfi.js"></script>
 <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-<script type="text/javascript" language="javascript" src="js/jquery-2.1.0.min.js"></script>
-<script type="text/javascript" language="javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
-<script type="text/javascript" language="javascript" src="js/jquery-ui-1.10.3.custom.js"></script>
-<script type="text/javascript" language="javascript" src="js/jquery.hoverIntent.minified.js"></script>
-<script type="text/javascript" language="javascript" src="js/jquery.ui.touch-punch.min.js"></script>
-<script type="text/javascript" language="javascript" src="js/scripts.js"></script>
 <link rel="stylesheet" type="text/css" media="all" href="style.css">
 <body>
 <div id="fb-root"></div>
@@ -76,11 +70,11 @@ require 'connection.php';
 if (!empty($_GET['thank']) && $_GET['thank']=="you" && !empty($_GET['id'])){
 	$id = $_GET["id"];
 	$direccion = 'http://alfredounapseudonbiografia.com/gallery.php?id='.$id;
-	echo '<div id="thank-container"><p>Gracias por completar mi historia. Ahora es el momento de compartirla con el mundo.</p>';
-	echo '<p>La dirección directa de tu cómic es <a href="'.$direccion.'">AlfredoUnaPseudoBiografia.com/gallery.php?id='.$id.'</a></p>';
+	echo '<div id="thank-container"><p>¡Gracias por completar mi historia! Ahora es el momento de compartirla con el mundo. ';
+	echo 'La dirección directa de tu cómic es <a href="'.$direccion.'">AlfredoUnaPseudoBiografia.com/gallery.php?id='.$id.'</a></p>';
 	echo '<div id="social">';
 	echo '<div class="fb-like" data-href="'.$direccion.'" data-layout="button" data-action="like" data-show-faces="false" data-share="true"></div>';
-	echo '</div></div>';
+	echo '<div><a href="'.$direccion.'" class="twitter-share-button" data-lang="en" data-count="none">Tweet</a></div></div></div>';
 }
 if (!empty($_COOKIE['max'])) {//----------------------------------------------------------------------- Max Pages Set in Cookies
 	$max = $_COOKIE['max'];
@@ -240,7 +234,7 @@ while ($fieldinfo = mysqli_fetch_array($result)){
 		}
 		echo '<div id="social">';
 		echo '<div class="fb-like" data-href="'.$direccion.'" data-layout="button" data-action="like" data-show-faces="false" data-share="true"></div>';
-		echo '</div>';
+		echo '<div><a href="'.$direccion.'" class="twitter-share-button" data-lang="en" data-count="none">Tweet</a></div></div>';
 		echo '</div>';
 		mysqli_free_result($panels);
 		$comicPageCount = 0;
@@ -266,4 +260,13 @@ mysqli_close($con);
 
 ?>
 </div>
+<script>//-------------------- Twitter
+!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+</script>
+<script type="text/javascript" language="javascript" src="js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript" language="javascript" src="js/jquery-migrate-1.2.1.min.js"></script>
+<script type="text/javascript" language="javascript" src="js/jquery-ui-1.10.3.custom.js"></script>
+<script type="text/javascript" language="javascript" src="js/jquery.hoverIntent.minified.js"></script>
+<script type="text/javascript" language="javascript" src="js/jquery.ui.touch-punch.min.js"></script>
+<script type="text/javascript" language="javascript" src="js/scripts.js"></script>
 </body>
