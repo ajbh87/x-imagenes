@@ -69,7 +69,7 @@ function cPageCounter($id, $con) {
 require 'connection.php';
 if (!empty($_GET['thank']) && $_GET['thank']=="you" && !empty($_GET['id'])){
 	$id = $_GET["id"];
-	$direccion = 'http://alfredounapseudonbiografia.com/gallery.php?id='.$id;
+	$direccion = 'http://alfredounapseudobiografia.com/gallery.php?id='.$id;
 	echo '<div id="thank-container"><p>¡Gracias por completar mi historia! Ahora es el momento de compartirla con el mundo. ';
 	echo 'La dirección directa de tu cómic es <a href="'.$direccion.'">AlfredoUnaPseudoBiografia.com/gallery.php?id='.$id.'</a></p>';
 	echo '<div id="social">';
